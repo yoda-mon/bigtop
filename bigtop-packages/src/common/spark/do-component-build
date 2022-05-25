@@ -28,6 +28,7 @@ BUILD_OPTS="-Divy.home=${HOME}/.ivy2 -Dsbt.ivy.home=${HOME}/.ivy2 -Duser.home=${
             -Psparkr \
             -Pscala-${SCALA_VERSION%.*} \
             -Dguava.version=27.0-jre \
+            -Pkubernetes \
             $SPARK_BUILD_OPTS"
 
 ./dev/make-distribution.sh --mvn mvn --r $BUILD_OPTS -DskipTests

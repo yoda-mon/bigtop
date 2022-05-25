@@ -1,0 +1,12 @@
+/usr/lib/kubernetes
+/usr/lib/jars/automaton-*.jar
+/usr/lib/jars/generex-*.jar
+/usr/lib/jars/jackson-dataformat-yaml-*.jar
+/usr/lib/jars/jackson-datatype-jsr310-*.jar
+/usr/lib/jars/kubernetes-client-*.jar
+/usr/lib/jars/kubernetes-model-*.jar
+/usr/lib/jars/logging-interceptor-*.jar
+/usr/lib/jars/okhttp-3.*.jar
+/usr/lib/jars/snakeyaml-*.jar
+/usr/lib/jars/spark-kubernetes*.jar
+/usr/lib/jars/zjsonpatch-*.jar

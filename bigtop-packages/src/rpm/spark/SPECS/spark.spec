@@ -156,6 +156,14 @@ Requires: spark-core = %{version}-%{release}, R
 %description -n spark-sparkr
 SparkR is an R package that provides a light-weight frontend to use Apache Spark from R.
 
+%package -n spark-kubernetes
+Summary: Spark on Kubernetes libraries
+Group: Development/Libraries
+Requires: spark-core = %{version}-%{release}
+
+%description -n spark-kubernetes
+Spark can run on clusters managed by Kubernetes. This feature makes use of native Kubernetes scheduler that has been added to Spark.
+
 %prep
 %setup -n %{spark_name}-%{spark_base_version}
 
@@ -240,6 +248,18 @@ done
 %exclude %{lib_spark}/R
 %exclude %{lib_spark}/bin/sparkR
 %exclude %{bin}/sparkR
+%exclude %{lib_spark}/kubernetes
+%exclude %{lib_spark}/jars/automaton-*.jar
+%exclude %{lib_spark}/jars/generex-*.jar
+%exclude %{lib_spark}/jars/jackson-dataformat-yaml-*.jar
+%exclude %{lib_spark}/jars/jackson-datatype-jsr310-*.jar
+%exclude %{lib_spark}/jars/kubernetes-client-*.jar
+%exclude %{lib_spark}/jars/kubernetes-model-*.jar
+%exclude %{lib_spark}/jars/logging-interceptor-*.jar
+%exclude %{lib_spark}/jars/okhttp-3.*.jar
+%exclude %{lib_spark}/jars/snakeyaml-*.jar
+%exclude %{lib_spark}/jars/spark-kubernetes*.jar
+%exclude %{lib_spark}/jars/zjsonpatch-*.jar
 
 %files -n spark-python
 %defattr(-,root,root,755)
@@ -266,6 +286,21 @@ done
 %{lib_spark}/R
 %{lib_spark}/bin/sparkR
 %{bin}/sparkR
+
+%files -n spark-kubernetes
+%defattr(-,root,root,755)
+%{lib_spark}/kubernetes
+%{lib_spark}/jars/automaton-*.jar
+%{lib_spark}/jars/generex-*.jar
+%{lib_spark}/jars/jackson-dataformat-yaml-*.jar
+%{lib_spark}/jars/jackson-datatype-jsr310-*.jar
+%{lib_spark}/jars/kubernetes-client-*.jar
+%{lib_spark}/jars/kubernetes-model-*.jar
+%{lib_spark}/jars/logging-interceptor-*.jar
+%{lib_spark}/jars/okhttp-3.*.jar
+%{lib_spark}/jars/snakeyaml-*.jar
+%{lib_spark}/jars/spark-kubernetes*.jar
+%{lib_spark}/jars/zjsonpatch-*.jar
 
 %define service_macro() \
 %files -n %1 \
