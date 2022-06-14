@@ -1,8 +1,8 @@
-diff --git common/src/java/org/apache/hadoop/hive/conf/HiveConf.java common/src/java/org/apache/hadoop/hive/conf/HiveConf.java
+diff --git a/common/src/java/org/apache/hadoop/hive/conf/HiveConf.java b/common/src/java/org/apache/hadoop/hive/conf/HiveConf.java
 index c5e46e910e..282f4cdb0b 100644
---- common/src/java/org/apache/hadoop/hive/conf/HiveConf.java
-+++ common/src/java/org/apache/hadoop/hive/conf/HiveConf.java
-@@ -3638,12 +3638,6 @@ private static void populateLlapDaemonVarsSet(Set<String> llapDaemonVarsSetLocal
+--- a/common/src/java/org/apache/hadoop/hive/conf/HiveConf.java
++++ b/common/src/java/org/apache/hadoop/hive/conf/HiveConf.java
+@@ -3350,12 +3350,6 @@ private static void populateLlapDaemonVarsSet(Set<String> llapDaemonVarsSetLocal
          "SSL certificate keystore location."),
      HIVE_SERVER2_SSL_KEYSTORE_PASSWORD("hive.server2.keystore.password", "",
          "SSL certificate keystore password."),
@@ -15,10 +15,10 @@ index c5e46e910e..282f4cdb0b 100644
      HIVE_SERVER2_BUILTIN_UDF_WHITELIST("hive.server2.builtin.udf.whitelist", "",
          "Comma separated list of builtin udf names allowed in queries.\n" +
          "An empty whitelist allows all builtin udfs to be executed. " +
-diff --git itests/hive-unit-hadoop2/src/test/java/org/apache/hive/jdbc/TestSchedulerQueue.java itests/hive-unit-hadoop2/src/test/java/org/apache/hive/jdbc/TestSchedulerQueue.java
+diff --git a/itests/hive-unit-hadoop2/src/test/java/org/apache/hive/jdbc/TestSchedulerQueue.java b/itests/hive-unit-hadoop2/src/test/java/org/apache/hive/jdbc/TestSchedulerQueue.java
 deleted file mode 100644
 index 6e57e811fe..0000000000
---- itests/hive-unit-hadoop2/src/test/java/org/apache/hive/jdbc/TestSchedulerQueue.java
+--- a/itests/hive-unit-hadoop2/src/test/java/org/apache/hive/jdbc/TestSchedulerQueue.java
 +++ /dev/null
 @@ -1,175 +0,0 @@
 -/*
@@ -196,11 +196,11 @@ index 6e57e811fe..0000000000
 -    assertEquals("Property should be set", expectedValue, results[1]);
 -  }
 -}
-diff --git service/src/java/org/apache/hive/service/cli/session/HiveSessionImpl.java service/src/java/org/apache/hive/service/cli/session/HiveSessionImpl.java
+diff --git a/service/src/java/org/apache/hive/service/cli/session/HiveSessionImpl.java b/service/src/java/org/apache/hive/service/cli/session/HiveSessionImpl.java
 index a0e27c9b50..81d6a7e095 100644
---- service/src/java/org/apache/hive/service/cli/session/HiveSessionImpl.java
-+++ service/src/java/org/apache/hive/service/cli/session/HiveSessionImpl.java
-@@ -136,16 +136,6 @@ public HiveSessionImpl(SessionHandle sessionHandle, TProtocolVersion protocol,
+--- a/service/src/java/org/apache/hive/service/cli/session/HiveSessionImpl.java
++++ b/service/src/java/org/apache/hive/service/cli/session/HiveSessionImpl.java
+@@ -134,16 +134,6 @@ public HiveSessionImpl(SessionHandle sessionHandle, TProtocolVersion protocol,
      this.forwardedAddresses = forwardedAddresses;
      this.operationLock = serverConf.getBoolVar(
          ConfVars.HIVE_SERVER2_PARALLEL_OPS_IN_SESSION) ? null : new Semaphore(1);
@@ -217,11 +217,11 @@ index a0e27c9b50..81d6a7e095 100644
      // Set an explicit session name to control the download directory name
      sessionConf.set(ConfVars.HIVESESSIONID.varname,
          this.sessionHandle.getHandleIdentifier().toString());
-diff --git shims/0.23/src/main/java/org/apache/hadoop/hive/shims/Hadoop23Shims.java shims/0.23/src/main/java/org/apache/hadoop/hive/shims/Hadoop23Shims.java
+diff --git a/shims/0.23/src/main/java/org/apache/hadoop/hive/shims/Hadoop23Shims.java b/shims/0.23/src/main/java/org/apache/hadoop/hive/shims/Hadoop23Shims.java
 index 3569499205..f55b3ff1f3 100644
---- shims/0.23/src/main/java/org/apache/hadoop/hive/shims/Hadoop23Shims.java
-+++ shims/0.23/src/main/java/org/apache/hadoop/hive/shims/Hadoop23Shims.java
-@@ -262,9 +262,7 @@ public int compare(LongWritable o1, LongWritable o2) {
+--- a/shims/0.23/src/main/java/org/apache/hadoop/hive/shims/Hadoop23Shims.java
++++ b/shims/0.23/src/main/java/org/apache/hadoop/hive/shims/Hadoop23Shims.java
+@@ -257,9 +257,7 @@ public int compare(LongWritable o1, LongWritable o2) {
     */
    @Override
    public void refreshDefaultQueue(Configuration conf, String userName) throws IOException {
@@ -232,10 +232,10 @@ index 3569499205..f55b3ff1f3 100644
    }
  
    private boolean isFairScheduler (Configuration conf) {
-diff --git shims/common/src/main/java/org/apache/hadoop/hive/shims/SchedulerShim.java shims/common/src/main/java/org/apache/hadoop/hive/shims/SchedulerShim.java
+diff --git a/shims/common/src/main/java/org/apache/hadoop/hive/shims/SchedulerShim.java b/shims/common/src/main/java/org/apache/hadoop/hive/shims/SchedulerShim.java
 deleted file mode 100644
 index ec8d1a0ff6..0000000000
---- shims/common/src/main/java/org/apache/hadoop/hive/shims/SchedulerShim.java
+--- a/shims/common/src/main/java/org/apache/hadoop/hive/shims/SchedulerShim.java
 +++ /dev/null
 @@ -1,37 +0,0 @@
 -/*
@@ -275,20 +275,20 @@ index ec8d1a0ff6..0000000000
 -  public void refreshDefaultQueue(Configuration conf, String userName)
 -      throws IOException;
 -}
-diff --git shims/common/src/main/java/org/apache/hadoop/hive/shims/ShimLoader.java shims/common/src/main/java/org/apache/hadoop/hive/shims/ShimLoader.java
+diff --git a/shims/common/src/main/java/org/apache/hadoop/hive/shims/ShimLoader.java b/shims/common/src/main/java/org/apache/hadoop/hive/shims/ShimLoader.java
 index 12dbaced3a..206a6d9051 100644
---- shims/common/src/main/java/org/apache/hadoop/hive/shims/ShimLoader.java
-+++ shims/common/src/main/java/org/apache/hadoop/hive/shims/ShimLoader.java
-@@ -33,7 +33,6 @@
-   public static final String HADOOP23VERSIONNAME = "0.23";
- 
+--- a/shims/common/src/main/java/org/apache/hadoop/hive/shims/ShimLoader.java
++++ b/shims/common/src/main/java/org/apache/hadoop/hive/shims/ShimLoader.java
+@@ -36,7 +36,6 @@
    private static volatile HadoopShims hadoopShims;
+   private static JettyShims jettyShims;
+   private static AppenderSkeleton eventCounter;
 -  private static SchedulerShim schedulerShim;
  
    /**
     * The names of the classes for shimming Hadoop for each major version.
-@@ -91,12 +90,6 @@ public static HadoopShims getHadoopShims() {
-     return hadoopShims;
+@@ -101,13 +96,6 @@ public static synchronized AppenderSkeleton getEventCounter() {
+     return eventCounter;
    }
  
 -  public static synchronized SchedulerShim getSchedulerShims() {
@@ -297,13 +297,14 @@ index 12dbaced3a..206a6d9051 100644
 -    }
 -    return schedulerShim;
 -  }
- 
+-
    private static <T> T loadShims(Map<String, String> classMap, Class<T> xface) {
      String vers = getMajorVersion();
-diff --git shims/scheduler/src/main/java/org/apache/hadoop/hive/schshim/FairSchedulerShim.java shims/scheduler/src/main/java/org/apache/hadoop/hive/schshim/FairSchedulerShim.java
+     String className = classMap.get(vers);
+diff --git a/shims/scheduler/src/main/java/org/apache/hadoop/hive/schshim/FairSchedulerShim.java b/shims/scheduler/src/main/java/org/apache/hadoop/hive/schshim/FairSchedulerShim.java
 deleted file mode 100644
 index 6d12f05e69..0000000000
---- shims/scheduler/src/main/java/org/apache/hadoop/hive/schshim/FairSchedulerShim.java
+--- a/shims/scheduler/src/main/java/org/apache/hadoop/hive/schshim/FairSchedulerShim.java
 +++ /dev/null
 @@ -1,70 +0,0 @@
 -/*
