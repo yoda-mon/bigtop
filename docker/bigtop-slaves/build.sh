@@ -89,5 +89,10 @@ fi
 sed -e "s|PREFIX|${PREFIX}|;s|OS|${OS}|;s|VERSION|${VERSION}|" Dockerfile.template | \
   sed -e "s|PUPPET_MODULES|${PUPPET_MODULES}|;s|UPDATE_SOURCE|${UPDATE_SOURCE}|" > Dockerfile
 
+# use java 8 if the default java version is newer
+if [ "${OS}-${VERSION}" = "fedora-36" ];then
+  sed -i -e "s|RUN cd /tmp/bigtop |RUN cd /tmp/bigtop \&\& alternatives --set java java-1.8.0-openjdk.${ARCH} |" Dockerfile
+fi
+
 docker build ${NETWORK} --rm -t bigtop/slaves:${PREFIX}-${OS}-${VERSION} -f Dockerfile ../..
 rm -f Dockerfile
