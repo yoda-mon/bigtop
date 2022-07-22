@@ -89,10 +89,17 @@ fi
 sed -e "s|PREFIX|${PREFIX}|;s|OS|${OS}|;s|VERSION|${VERSION}|" Dockerfile.template | \
   sed -e "s|PUPPET_MODULES|${PUPPET_MODULES}|;s|UPDATE_SOURCE|${UPDATE_SOURCE}|" > Dockerfile
 
+#if [[ "${OS}-${VERSION}" == "fedora-36"* ]]; then
+#  sed -i -e "s|COPY . /tmp/bigtop|ENV PATH /usr/lib/jvm/java-1.8.0/bin:\$PATH\nCOPY . /tmp/bigtop|" Dockerfile
+#fi
 # use java 8 during build if the os's default java version is newer
-if [[ "${OS}-${VERSION}" == "fedora-36"* ]];then
-  sed -i -e "s|RUN cd /tmp/bigtop |RUN cd /tmp/bigtop \&\& alternatives --set java java-1.8.0-openjdk.${ARCH} |" Dockerfile
-fi
+case "${OS}-${VERSION}" in
+  fedora-36*)
+    sed -i -e "s|COPY . /tmp/bigtop|ENV PATH /usr/lib/jvm/java-1.8.0/bin:\$PATH\nCOPY . /tmp/bigtop|" Dockerfile
+    ;;
+  *)
+    ;;
+esac
 
 docker build ${NETWORK} --rm -t bigtop/slaves:${PREFIX}-${OS}-${VERSION} -f Dockerfile ../..
 rm -f Dockerfile
